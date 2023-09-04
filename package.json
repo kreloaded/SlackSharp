@@ -4,7 +4,10 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js"
+    "start": "node app.js",
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "pre-commit": "lint-staged"
   },
   "keywords": [],
   "author": "",
@@ -15,5 +18,18 @@
     "helmet": "7.0.0",
     "morgan": "1.10.0",
     "serverless-http": "3.2.0"
+  },
+  "devDependencies": {
+    "eslint": "8.48.0",
+    "prettier": "3.0.3"
+  },
+  "pre-commit": [
+    "pre-commit"
+  ],
+  "lint-staged": {
+    "*.js": [
+      "prettier --write --config .prettierrc.json",
+      "git add"
+    ]
   }
 }

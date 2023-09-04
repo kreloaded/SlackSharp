@@ -30,9 +30,9 @@ app.use(bodyParser.json({ limit: '2mb' }));
 app.use(bodyParser.urlencoded({ extended: true, limit: '2mb' }));
 
 const getRequestParams = function (req) {
-  if (req.method === "POST") {
+  if (req.method === 'POST') {
     return req.body;
-  } else if (req.method === "GET") {
+  } else if (req.method === 'GET') {
     return req.query;
   }
 
@@ -51,7 +51,10 @@ const assignParams = function (req, res, next) {
 app.use(setResponseHeader());
 
 // If running in development mode, start the server on port 8080, else export handler for lambda
-if (coreConstants.ENVIRONMENT === 'development' || coreConstants.ENVIRONMENT === 'test') {
+if (
+  coreConstants.ENVIRONMENT === 'development' ||
+  coreConstants.ENVIRONMENT === 'test'
+) {
   console.log('Server running on 8080');
   app.listen(8080);
   module.exports = { handler: app };
