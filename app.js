@@ -11,7 +11,9 @@ dotenv.configDotenv();
 const rootPrefix = '.',
   coreConstants = require(rootPrefix + '/config/coreConstants'),
   slackmin = require(rootPrefix + '/slackmin'),
-  setResponseHeader = require(rootPrefix + '/middlewares/setResponseHeader');
+  setResponseHeader = require(rootPrefix + '/middlewares/setResponseHeader'),
+  slackOpenModalLib = require(rootPrefix + '/lib/slack/openModal'),
+  slackGetSuggestionsLib = require(rootPrefix + '/lib/slack/getSuggestions');
 
 // Set worker process title.
 process.title = 'SlackSharp';
@@ -43,11 +45,11 @@ app.post(
   async function (req, res) {
     const responseUrl = req.decodedParams.response_url;
 
-    const message = new slackmin.interactiveElements.Message();
-    message.addSection('Interactive endpoint called');
-    message.addSectionWithTextFields(['Hi', 'there']);
+    const inputMessage = req.decodedParams.input_message;
+    const promptType = req.decodedParams.prompt_type;
 
-    await message.sendUsingResponseUrl(responseUrl, true);
+    const getSuggestionsLib = new slackGetSuggestionsLib();
+    getSuggestionsLib.perform(responseUrl, inputMessage, promptType);
 
     return res.status(200).json();
   },
@@ -61,34 +63,8 @@ app.post(
     const responseUrl = req.decodedParams.response_url;
     const apiAppId = req.decodedParams.api_app_id;
 
-    const modal = new slackmin.interactiveElements.Modal(
-      apiAppId,
-      'Test Modal',
-    );
-    modal.addAction('sharpen_modal_submit');
-    modal.addDivider();
-
-    // These are the parameter names for the subsequent textboxes.
-    const paramsMeta = ['input_text', 'prompt_type'];
-    modal.addParamsMeta(paramsMeta);
-    modal.addTextbox('Enter text', true, false, '', 'Enter message here');
-
-    modal.addHiddenParamsMeta({ response_url: responseUrl });
-    modal.addRadioButtons(
-      'Prompt type',
-      [
-        { text: 'Formal', value: 'formal' },
-        { text: 'Informal', value: 'informal' },
-        { text: 'Casual', value: 'casual' },
-      ],
-      { text: 'Formal', value: 'formal' },
-    );
-
-    modal.addSubmitAndCancel();
-
-    console.log('Opening modal');
-    await modal.open(triggerId);
-    console.log('Modal opened');
+    const openModalLib = new slackOpenModalLib();
+    await openModalLib.perform(triggerId, responseUrl, apiAppId);
 
     return res.status(200).json();
   },

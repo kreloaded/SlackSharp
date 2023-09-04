@@ -18,6 +18,10 @@ class CoreConstants {
   get SLACK_DOMAIN() {
     return process.env.SLACK_DOMAIN;
   }
+
+  get OPENAI_API_KEY() {
+    return process.env.OPENAI_API_KEY;
+  }
 }
 
 module.exports = new CoreConstants();
