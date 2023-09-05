@@ -13,7 +13,7 @@ We expect all members of our community to adhere to the following guidelines whe
 
 ## Reporting Issues
 
-If you encounter any issues or witness any behavior that violates this Code of Conduct, please report it to the project maintainers listed in CONTACT.md file. All reports will be kept confidential and will be addressed promptly and thoughtfully.
+If you encounter any issues or witness any behavior that violates this Code of Conduct. All reports will be kept confidential and will be addressed promptly and thoughtfully.
 
 ## Attribution
 
