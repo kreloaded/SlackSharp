@@ -103,7 +103,7 @@ async function getOpenAiSuggestionAndSendToChannel(
         type: 'section',
         text: {
           type: 'mrkdwn',
-          text: `*Formatted Message*: ${suggestionResponse.message}`
+          text: `*Formatted Response*: ${suggestionResponse.message}`
         }
       }
     ]
