@@ -77,6 +77,8 @@ async function getOpenAiSuggestionAndSendToChannel(
   responseUrl,
 ) {
   console.log('Calling openai lib');
+  messageText = messageText.trim();
+
   const openAiCompletionLib = new OpenAiCompletionLib();
   const suggestionResponse = await openAiCompletionLib.getSuggestions(
     promptType,
