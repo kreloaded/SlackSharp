@@ -1,6 +1,6 @@
 # Environment Variables Description
 
-This document provides descriptions for the environment variables used in the configuration of the Sales Sparrow api. These variables are essential for configuring and customizing the behavior of the application.
+This document provides descriptions for the environment variables used in the configuration of the SlakSharp project. These variables are essential for configuring and customizing the behavior of the application.
 
 ## ENVIRONMENT
 
