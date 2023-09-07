@@ -86,10 +86,29 @@ async function getOpenAiSuggestionAndSendToChannel(
   );
   console.log('suggestionResponse: ', suggestionResponse);
 
-  await axios.post(responseUrl, {
-    text: suggestionResponse.message,
+  const payload = {
     response_type: 'ephemeral',
-  });
+    blocks: [
+      {
+        type: 'section',
+        text: {
+          type: 'mrkdwn',
+          text: `*Input Message*: ${messageText}`
+        }
+      },
+      {
+        type: 'divider'
+      },
+      {
+        type: 'section',
+        text: {
+          type: 'mrkdwn',
+          text: `*Formatted Message*: ${suggestionResponse.message}`
+        }
+      }
+    ]
+  };
+  await axios.post(responseUrl, payload);
 }
 
 // Start your slack-app
