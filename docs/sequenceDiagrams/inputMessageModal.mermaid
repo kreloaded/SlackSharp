@@ -1,0 +1,18 @@
+sequenceDiagram
+  title Open Input Message Modal
+    participant ui as Slack
+    participant bot as Slacksharp Bot
+    participant lib as OpenModal Lib
+
+
+    ui->>bot:  Send request 
+    note right of ui: Request: <br>POST {api_base_url}/slack/events <br> command: open-modal
+
+    note over bot: Acknowledge the request
+
+    bot->>lib: Call perform method of OpenModal lib
+    note over lib: Construct Input Message Modal 
+
+    lib->>bot: Input Message Modal 
+
+    bot-->>ui: Input Message Modal 

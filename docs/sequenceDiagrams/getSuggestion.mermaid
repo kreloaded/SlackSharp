@@ -1,0 +1,28 @@
+sequenceDiagram
+  title Get Suggestion
+    participant ui as Slack
+    participant bot as Slacksharp Bot
+    participant sugestionsLib as GetSuggestions(lib)
+    participant openAiLib as OpenAi Completion(lib)
+    participant OpenAI
+
+
+    ui->>bot:  Send request 
+    note right of ui: Request: <br>POST {api_base_url}/slack/events <br> view: suggestion-modal
+
+    bot->>sugestionsLib: Call perform method of GetSuggestions lib
+
+    sugestionsLib->>openAiLib: Call getSuggestions method of OpenAi Completion lib
+    note over openAiLib: Based on prompt type, construct the prompt
+
+    openAiLib->>OpenAI: Call chat completions endpoint
+
+    alt If error from OpenAI
+        OpenAI-->>openAiLib: Error
+        openAiLib-->>bot:Error
+        bot-->>ui:Error
+    end
+
+    note over bot: Acknowledge the request
+  
+    bot-->>ui: Input Message Modal 
