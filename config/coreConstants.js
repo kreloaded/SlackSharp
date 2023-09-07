@@ -22,6 +22,10 @@ class CoreConstants {
   get OPENAI_API_KEY() {
     return process.env.OPENAI_API_KEY;
   }
+
+  get GOOGLE_SPEECH_TO_TEXT_CRED_FILE_NAME() {
+    return process.env.GOOGLE_SPEECH_TO_TEXT_CRED_FILE_NAME;
+  }
 }
 
 module.exports = new CoreConstants();

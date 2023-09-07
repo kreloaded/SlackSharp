@@ -7,6 +7,7 @@ dotenv.configDotenv();
 const rootPrefix = '.',
   coreConstants = require(rootPrefix + '/config/coreConstants'),
   OpenModal = require(rootPrefix + '/lib/slack/openModal'),
+  SpeechToTextLib = require(rootPrefix + '/lib/google/speechToText'),
   OpenAiCompletionLib = require(rootPrefix + '/lib/openAi/completion');
 
 // Initialize your Slack app with the bot token
@@ -17,43 +18,10 @@ const slackApp = new App({
 
 // Event listener for file shared events
 slackApp.event('file_shared', async ({ event, say, client }) => {
-  console.log('Received message -----');
-  console.log('event: ------', event);
-  try {
-    // Check if the shared file is audio
+  console.log('Received file event');
 
-    const fileInfo = await client.files.info({
-      file: event.file_id,
-    });
-
-    console.log('fileInfo: -----', fileInfo);
-    // Get audio URL from file info
-    const audioUrl = fileInfo.file.url_private_download;
-    console.log('audioUrl: -------', audioUrl);
-
-    const audioResponse = await axios.get(audioUrl, {
-      headers: {
-        Authorization: `Bearer ${coreConstants.SLACK_BOT_USER_OAUTH_TOKEN}`,
-      },
-      responseType: 'arraybuffer',
-    });
-    const audioBuffer = audioResponse.data;
-    console.log('audioBuffer: -----', audioBuffer);
-    // Download audio file from Slack and process it
-    // Implement audio processing and text generation here
-    // Example response
-    const formattedMessage = 'Your formatted response here';
-
-    // Send the formatted message as a reply
-    await say({
-      text: formattedMessage,
-      thread_ts: event.thread_ts || event.event_ts, // Reply within the same thread or event
-    });
-
-    return;
-  } catch (error) {
-    console.error('Error:', error);
-  }
+  const speechToTextLib = new SpeechToTextLib();
+  await speechToTextLib.perform(event, say, client);
 });
 
 // Url verification required by slack
