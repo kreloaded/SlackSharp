@@ -1,4 +1,5 @@
 ## Slack app setup
+
 First things first, setup a slack app as mentioned in [this guide](https://api.slack.com/authentication/basics). Following are the major steps involved:
 
 - Create a slack app. Visit https://api.slack.com/apps.

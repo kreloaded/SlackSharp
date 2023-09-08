@@ -15,6 +15,7 @@ This file provides an overview of the directory structure of the project. It exp
 ### index.js
 
 This file is the entry point of the project. It contains the code for starting the slack bot.
+
 ### config/
 
 This folder contains the configuration files for the project. It contains coreConstants which have constants for environment variables used in the project.

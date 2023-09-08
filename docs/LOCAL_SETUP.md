@@ -14,6 +14,7 @@ $ git clone git@github.com:kreloaded/SlackSharp.git
 
 $ cd SlackSharp
 ```
+
 ### Install Dependencies
 
 ```sh
@@ -35,15 +36,15 @@ $ npm start
 ## Ngrok Setup
 
 ### Install ngrok npm package globally
+
 ```sh
 $ npm install -g ngrok
 ```
 
 ### Run ngrok
+
 ```sh
 $ ngrok http 3000
 ```
 
 - Copy the https forwarding url from the terminal and paste it in the Request URL field of the slack app configuration page.
-
-

@@ -7,7 +7,7 @@ dotenv.configDotenv();
 const rootPrefix = '.',
   coreConstants = require(rootPrefix + '/config/coreConstants'),
   OpenModal = require(rootPrefix + '/lib/slack/openModal'),
-  SpeechToTextLib = require(rootPrefix + '/lib/google/speechToText'),
+  SpeechToTextWhisper = require(rootPrefix + '/lib/openAi/speechToText'),
   OpenAiCompletionLib = require(rootPrefix + '/lib/openAi/completion');
 
 // Initialize your Slack app with the bot token
@@ -20,7 +20,7 @@ const slackApp = new App({
 slackApp.event('file_shared', async ({ event, say, client }) => {
   console.log('Received file event');
 
-  const speechToTextLib = new SpeechToTextLib();
+  const speechToTextLib = new SpeechToTextWhisper();
   await speechToTextLib.perform(event, say, client);
 });
 
@@ -93,20 +93,20 @@ async function getOpenAiSuggestionAndSendToChannel(
         type: 'section',
         text: {
           type: 'mrkdwn',
-          text: `*Input Message*: ${messageText}`
-        }
+          text: `*Input Message*: ${messageText}`,
+        },
       },
       {
-        type: 'divider'
+        type: 'divider',
       },
       {
         type: 'section',
         text: {
           type: 'mrkdwn',
-          text: `*Formatted Response*: ${suggestionResponse.message}`
-        }
-      }
-    ]
+          text: `*Formatted Response*: ${suggestionResponse.message}`,
+        },
+      },
+    ],
   };
   await axios.post(responseUrl, payload);
 }

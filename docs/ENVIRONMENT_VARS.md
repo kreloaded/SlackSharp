@@ -4,12 +4,12 @@ This document provides descriptions for the environment variables used in the co
 
 ## ENVIRONMENT
 
-- **Description:**  Specifies the current deployment stage (e.g., "development," "testing," "production").
+- **Description:** Specifies the current deployment stage (e.g., "development," "testing," "production").
 - **Example Value:** `production`
 
 ## SLACK_APP_ID
 
-- **Description:**  Unique identifier for a Slack application.
+- **Description:** Unique identifier for a Slack application.
 - **Example Value:** `ABC123XYZ`
 
 ## SLACK_SIGNING_SECRET
@@ -26,4 +26,3 @@ This document provides descriptions for the environment variables used in the co
 
 - **Description:** Slack workspace's web address or domain (e.g., "yourcompany.slack.com").
 - **Example Value:** `yourcompany.slack.com`
-
