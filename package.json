@@ -1,0 +1,40 @@
+{
+  "name": "slacksharp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "pre-commit": "lint-staged"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@google-cloud/speech": "6.0.1",
+    "@slack/bolt": "3.13.3",
+    "@truesparrow/slackmin": "4.0.0",
+    "dotenv": "16.3.1",
+    "express": "4.18.2",
+    "fluent-ffmpeg": "2.1.2",
+    "helmet": "7.0.0",
+    "morgan": "1.10.0",
+    "openai": "4.4.0",
+    "serverless-http": "3.2.0"
+  },
+  "devDependencies": {
+    "eslint": "8.48.0",
+    "prettier": "3.0.3"
+  },
+  "pre-commit": [
+    "pre-commit"
+  ],
+  "lint-staged": {
+    "*.js": [
+      "prettier --write --config .prettierrc.json",
+      "git add"
+    ]
+  }
+}
