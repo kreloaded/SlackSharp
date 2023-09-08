@@ -1,0 +1,37 @@
+sequenceDiagram
+  title Speech to formatted text
+    participant ui as Slack
+    participant bot as Slacksharp Bot
+    participant lib as speechToText(Lib)
+    participant speechToText as OpenAIWhisper
+    participant openAiLib as OpenAi Completion(lib)
+    participant OpenAI
+
+
+    ui->>bot:  Send request 
+    note right of ui: Request: <br>POST {api_base_url}/slack/events <br> event: file_shared
+
+    bot->>lib: Call perform method of Speech to text lib
+       
+    note over lib: validate the event
+
+    lib->>speechToText: Audio 
+    speechToText->>lib: Transcipt
+
+
+    lib->>openAiLib: Call getSuggestions method of OpenAi Completion lib
+    note over openAiLib: Construct the prompt
+
+    openAiLib->>OpenAI: Call chat completions endpoint
+
+    alt If error from OpenAI
+        OpenAI-->>openAiLib: Error
+        openAiLib-->>bot:Error
+        bot-->>ui:Error
+    end
+    
+    OpenAI->>openAiLib: Response
+    openAiLib->>lib: Formatted message
+
+    lib->>bot: Formatted message
+    bot-->>ui: Formatted message

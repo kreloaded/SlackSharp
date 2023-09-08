@@ -10,6 +10,12 @@ Follow the steps in [LOCAL_SETUP](./docs/LOCAL_SETUP.md) to setup the project lo
 ## Environment Variables
 Refer to [ENVIRONMENT_VARS](./docs/ENVIRONMENT_VARS.md) for detailed descriptions for the environment variables.
 
+## Architecture Diagram
+Refer to [ARCHITECTURE DIAGRAM](./docs/ARCHITECTURE_DIAGRAM.png) for the architecture diagram.
+
+## Sequence Diagram
+Refer to [SEQUENCE DIAGRAM](./docs/sequenceDiagrams/) for the sequence diagram.
+
 ## License
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
